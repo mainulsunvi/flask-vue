@@ -1,43 +1,32 @@
 <template>
   <div class="main-container">
-    <div class="heading-container">{{ apiItems.name }}</div>
-    <button @click="fetchApiData">Fetch API Data</button>
+    <div class="counter">{{ counter }}</div>
+    <div class="heading-container">{{ appData.name }}</div>
+    <button @click="counter++">Click Counter</button>
+    <button @click="counter=0">Reset</button>
   </div>
 </template>
 
-<script>
-import { ref } from "vue";
-import axios from "axios";
+<script setup>
+import { onMounted, ref, inject } from "vue";
 
-export default {
-  setup() {
-    const apiItems = ref({});
+const appData = ref({});
+const counter = ref(0);
+appData.value = inject("appData");
 
-    const fetchApiData = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/data");
-
-        apiItems.value = response.data;
-
-      } catch (error) {
-        console.error("Error fetching API data:", error);
-      }
-    };
-
-    return {
-      apiItems,
-      fetchApiData,
-    };
-  },
-};
 </script>
 
 <style scoped>
 .heading-container {
-  font-size: 24px;
+  font-size: 40px;
   font-weight: 600;
   width: 100%;
   text-align: center;
+}
+
+.counter {
+  font-size: 48px;
+  font-weight: 600;
 }
 .main-container {
   display: flex;
@@ -57,6 +46,7 @@ button {
   border: none;
   border-radius: 4px;
   color: white;
-
+  cursor: pointer;
+  user-select: none;
 }
 </style>

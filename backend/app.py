@@ -7,7 +7,7 @@ app = Flask(__name__, static_folder='../static', template_folder='../templates')
 @app.route('/')
 def index():
 
-    data = { "name" : "Fask + Vue Js" }
+    data = { "name" : "Fask + Vue Js + 🌞✌" }
     return render_template('index.html', data=data)
 
 @app.route('/api/data')
